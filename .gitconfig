@@ -1,0 +1,13 @@
+[init]
+    defaultBranch = master
+
+[core]
+    autocrlf = input
+    editor = vim
+
+[color]
+    ui = auto
+
+[user]
+    name = Martin Lukas
+    email = martinlukasgit@protonmail.com
