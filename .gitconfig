@@ -11,3 +11,6 @@
 [user]
     name = Martin Lukas
     email = martinlukasgit@protonmail.com
+
+[pull]
+    rebase = true
