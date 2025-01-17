@@ -14,3 +14,18 @@
 
 [pull]
     rebase = true
+[alias]
+    st = status
+    ss = st -sb
+    lg = log --oneline --graph --decorate --all
+    d = diff --unified=10
+    a = add -A
+    c = commit
+    ac = !git a && git c
+    am = commit --amend --no-edit
+    undo = reset --soft HEAD~1
+    pu = push -u origin
+    p = push origin
+    ri = rebase -i
+    rc = rebase --continue
+

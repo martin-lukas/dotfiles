@@ -15,3 +15,7 @@ set smartindent
 
 set termguicolors
 colorscheme catppuccin_mocha
+
+let mapleader = " "
+set showcmd
+
