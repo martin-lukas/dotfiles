@@ -2,6 +2,7 @@
 call plug#begin()
 Plug 'vim-python/python-syntax'
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+Plug 'tpope/vim-commentary'
 call plug#end()
 
 " Mappings
