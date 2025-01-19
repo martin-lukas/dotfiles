@@ -1,8 +1,10 @@
 " Initialize Vim Plug
 call plug#begin()
-Plug 'vim-python/python-syntax'
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+Plug 'tpope/vim-sensible' " Sensible defaults (backspace, incsearch, scrolloff, autoread, % impr.)
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-python/python-syntax'
 call plug#end()
 
 " Mappings
@@ -24,9 +26,7 @@ set shiftwidth=4
 set expandtab
 set autoindent
 set smartindent
-set backspace=indent,eol,start
 set hlsearch
-set incsearch
 
 " If the file was opened before, jump to the last viewed/edited line in it.
 if has("autocmd")
