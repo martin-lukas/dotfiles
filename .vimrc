@@ -1,4 +1,4 @@
-" Initialize Vim Plug
+" Initialize Vim Plug (takes care of syntax and filetype detection)
 call plug#begin()
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 Plug 'tpope/vim-sensible' " Sensible defaults (backspace, incsearch, scrolloff, autoread, % impr.)
@@ -16,6 +16,7 @@ nnoremap <Leader>b :ls<CR>:b<Space>
 nnoremap <Leader>d :bd<CR>
 
 " Settings
+set nocompatible
 set termguicolors
 colorscheme catppuccin_mocha
 set number
