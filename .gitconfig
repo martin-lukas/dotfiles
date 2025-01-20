@@ -29,6 +29,7 @@
     rc = rebase --continue
     pu = push -u origin
     p = push origin
+    pf = p --force-with-lease
     f = fetch
     pl = pull --rebase
 
