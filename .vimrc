@@ -14,6 +14,7 @@ nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>b :ls<CR>:b<Space>
 nnoremap <Leader>d :bd<CR>
+" Newline without going into insert mode
 nnoremap <silent> <Leader>o :put =''<CR>
 nnoremap <silent> <Leader>O :put! =''<CR>
 
