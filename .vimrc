@@ -19,6 +19,7 @@ nnoremap <silent> <Leader>o :put =''<CR>
 nnoremap <silent> <Leader>O :put! =''<CR>
 
 " Settings
+language en_US.UTF-8
 set nocompatible
 set number
 set relativenumber
@@ -36,6 +37,9 @@ if has("autocmd")
 endif
 
 " Theme setting should go to the end, to avoid errors
+" Option 2 means always visible
+set laststatus=2
+set statusline=%f\ %h%w%m%r\ %=%(%l:%c%V\ %=\ %P%)
 set termguicolors
 colorscheme catppuccin_mocha
 
