@@ -23,7 +23,6 @@
     a = add -A
     c = commit
     ac = !git a && git c
-    am = commit --amend --no-edit
     undo = reset --soft HEAD~1
     ri = rebase -i
     rc = rebase --continue
