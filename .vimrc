@@ -14,11 +14,11 @@ nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>b :ls<CR>:b<Space>
 nnoremap <Leader>d :bd<CR>
+nnoremap <silent> <Leader>o :put =''<CR>
+nnoremap <silent> <Leader>O :put! =''<CR>
 
 " Settings
 set nocompatible
-set termguicolors
-colorscheme catppuccin_mocha
 set number
 set relativenumber
 set ruler
@@ -33,4 +33,8 @@ set hlsearch
 if has("autocmd")
   autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 endif
+
+" Theme setting should go to the end, to avoid errors
+set termguicolors
+colorscheme catppuccin_mocha
 
