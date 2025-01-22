@@ -30,6 +30,7 @@ set expandtab
 set autoindent
 set smartindent
 set hlsearch
+set colorcolumn=100
 
 " If the file was opened before, jump to the last viewed/edited line in it.
 if has("autocmd")
