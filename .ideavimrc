@@ -1,6 +1,8 @@
+" ----- Plugins ----- "
 packadd matchit
 
-" Mappings
+
+" ----- Mappings ----- "
 let mapleader = " "
 map <C-L> :nohlsearch<CR><C-L>
 map <Leader>a <Action>(Vcs.ShowHistoryForBlock)
@@ -11,12 +13,14 @@ map <Leader>j <Action>(QuickJavaDoc)
 map <Leader>w :w<CR>
 map <Leader>x <Action>(SelectInProjectView)
 
-" Configuration
+
+" ----- Settings ----- "
 set relativenumber
 set hlsearch
 set incsearch
 set colorcolumn=100
 set scrolloff=5
+
 
 " If the file was opened before, jump to the last viewed/edited line in it.
 if has("autocmd")
@@ -25,3 +29,4 @@ if has("autocmd")
       \     exe "normal! g`\"" |
       \ endif
 endif
+

@@ -1,4 +1,5 @@
-" Initialize Vim Plug (takes care of syntax and filetype detection)
+" ----- Plugins ----- "
+" (takes care of syntax and filetype detection)
 call plug#begin()
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 Plug 'tpope/vim-sensible' " Sensible defaults (backspace, incsearch, autoread, % impr.)
@@ -7,7 +8,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-python/python-syntax'
 call plug#end()
 
-" Mappings
+
+" ----- Mappings ----- "
 let mapleader = " "
 nnoremap <C-L> :nohlsearch<CR><C-L>
 nnoremap <Leader>b :ls<CR>:b<Space>
@@ -15,7 +17,8 @@ nnoremap <Leader>d :bd<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>w :w<CR>
 
-" Settings
+
+" ----- Settings ----- "
 language en_US.UTF-8
 set nocompatible
 set number
@@ -30,6 +33,16 @@ set smartindent
 set hlsearch
 set colorcolumn=100
 
+
+" ----- Theme ----- "
+" (theme setting should go to the end, to avoid errors)
+" Option 2 means always visible
+set laststatus=2
+set statusline=%f\ %h%w%m%r\ %=%(%l:%c%V\ %=\ %P%)
+set termguicolors
+colorscheme catppuccin_mocha
+
+
 " If the file was opened before, jump to the last viewed/edited line in it.
 if has("autocmd")
   autocmd BufReadPost *
@@ -37,11 +50,3 @@ if has("autocmd")
       \     exe "normal! g`\"" |
       \ endif
 endif
-
-" Theme setting should go to the end, to avoid errors
-" Option 2 means always visible
-set laststatus=2
-set statusline=%f\ %h%w%m%r\ %=%(%l:%c%V\ %=\ %P%)
-set termguicolors
-colorscheme catppuccin_mocha
-
