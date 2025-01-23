@@ -2,8 +2,14 @@ packadd matchit
 
 " Mappings
 let mapleader = " "
-nnoremap <C-L> :nohlsearch<CR><C-L>
-nnoremap <Leader>d :bd<CR>
+map <C-L> :nohlsearch<CR><C-L>
+map <Leader>a <Action>(Vcs.ShowHistoryForBlock)
+map <Leader>b :ls<CR>:b<Space>
+map <Leader>d :bd<CR>
+map <Leader>e <Action>(RecentFiles)
+map <Leader>j <Action>(QuickJavaDoc)
+map <Leader>w :w<CR>
+map <Leader>x <Action>(SelectInProjectView)
 
 " Configuration
 set relativenumber
@@ -14,6 +20,8 @@ set scrolloff=5
 
 " If the file was opened before, jump to the last viewed/edited line in it.
 if has("autocmd")
-  autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+  autocmd BufReadPost *
+      \ if line("'\"") > 0 && line("'\"") <= line("$") |
+      \     exe "normal! g`\"" |
+      \ endif
 endif
-

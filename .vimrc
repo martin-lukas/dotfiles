@@ -10,10 +10,10 @@ call plug#end()
 " Mappings
 let mapleader = " "
 nnoremap <C-L> :nohlsearch<CR><C-L>
-nnoremap <Leader>w :w<CR>
-nnoremap <Leader>q :q<CR>
 nnoremap <Leader>b :ls<CR>:b<Space>
 nnoremap <Leader>d :bd<CR>
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>w :w<CR>
 
 " Settings
 language en_US.UTF-8
@@ -32,7 +32,10 @@ set colorcolumn=100
 
 " If the file was opened before, jump to the last viewed/edited line in it.
 if has("autocmd")
-  autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+  autocmd BufReadPost *
+      \ if line("'\"") > 0 && line("'\"") <= line("$") |
+      \     exe "normal! g`\"" |
+      \ endif
 endif
 
 " Theme setting should go to the end, to avoid errors

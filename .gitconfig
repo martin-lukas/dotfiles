@@ -12,6 +12,9 @@
     name = Martin Lukas
     email = martinlukasgit@protonmail.com
 
+[push]
+    autoSetupRemote = true
+
 [pull]
     rebase = true
 
