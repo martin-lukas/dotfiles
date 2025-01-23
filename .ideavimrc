@@ -4,29 +4,16 @@ packadd matchit
 let mapleader = " "
 nnoremap <C-L> :nohlsearch<CR><C-L>
 nnoremap <Leader>d :bd<CR>
-" Newline without going into insert mode
-nnoremap <silent> <Leader>o :put =''<CR>
-nnoremap <silent> <Leader>O :put! =''<CR>
 
 " Configuration
 set clipboard=unnamedplus
 set relativenumber
-set ruler
-set tabstop=4
-set shiftwidth=4
-set expandtab
-set autoindent
-set smartindent
 set hlsearch
+set incsearch
 set colorcolumn=100
+set scrolloff=5
 
 " If the file was opened before, jump to the last viewed/edited line in it.
 if has("autocmd")
   autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 endif
-
-" Theme setting should go to the end, to avoid errors
-" Option 2 means always visible
-set laststatus=2
-set statusline=%f\ %h%w%m%r\ %=%(%l:%c%V\ %=\ %P%)
-
