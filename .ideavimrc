@@ -6,7 +6,6 @@ nnoremap <C-L> :nohlsearch<CR><C-L>
 nnoremap <Leader>d :bd<CR>
 
 " Configuration
-set clipboard=unnamedplus
 set relativenumber
 set hlsearch
 set incsearch
@@ -17,3 +16,4 @@ set scrolloff=5
 if has("autocmd")
   autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 endif
+

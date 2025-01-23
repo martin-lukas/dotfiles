@@ -18,7 +18,6 @@ nnoremap <Leader>d :bd<CR>
 " Settings
 language en_US.UTF-8
 set nocompatible
-set clipboard=unnamedplus
 set number
 set relativenumber
 set scrolloff=5
