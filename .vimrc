@@ -1,7 +1,7 @@
 " Initialize Vim Plug (takes care of syntax and filetype detection)
 call plug#begin()
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
-Plug 'tpope/vim-sensible' " Sensible defaults (backspace, incsearch, scrolloff, autoread, % impr.)
+Plug 'tpope/vim-sensible' " Sensible defaults (backspace, incsearch, autoread, % impr.)
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-python/python-syntax'
@@ -14,9 +14,6 @@ nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>b :ls<CR>:b<Space>
 nnoremap <Leader>d :bd<CR>
-" Newline without going into insert mode
-nnoremap <silent> <Leader>o :put =''<CR>
-nnoremap <silent> <Leader>O :put! =''<CR>
 
 " Settings
 language en_US.UTF-8
@@ -24,6 +21,7 @@ set nocompatible
 set clipboard=unnamedplus
 set number
 set relativenumber
+set scrolloff=5
 set ruler
 set tabstop=4
 set shiftwidth=4
