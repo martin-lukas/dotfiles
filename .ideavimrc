@@ -1,0 +1,13 @@
+packadd matchit
+
+" Mappings
+let mapleader = " "
+nnoremap <C-L> :nohlsearch<CR><C-L>
+nnoremap <Leader>d :bd<CR>
+" Newline without going into insert mode
+nnoremap <silent> <Leader>o :put =''<CR>
+nnoremap <silent> <Leader>O :put! =''<CR>
+
+" Configuration
+set clipboard=unnamedplus
+set relativenumber
