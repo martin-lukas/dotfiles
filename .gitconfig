@@ -27,6 +27,7 @@
     c = commit
     ac = !git a && git c
     undo = reset --soft HEAD~1
+    wipe = reset --hard HEAD
     ri = rebase -i
     rc = rebase --continue
     pu = push -u origin
