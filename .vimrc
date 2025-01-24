@@ -11,11 +11,11 @@ call plug#end()
 
 " ----- Mappings ----- "
 let mapleader = " "
-nnoremap <C-L> :nohlsearch<CR><C-L>
-nnoremap <Leader>b :ls<CR>:b<Space>
-nnoremap <Leader>d :bd<CR>
-nnoremap <Leader>q :q<CR>
-nnoremap <Leader>w :w<CR>
+noremap <C-L> :nohlsearch<CR><C-L>
+noremap <Leader>b :ls<CR>:b<Space>
+noremap <Leader>d :bd<CR>
+noremap <Leader>q :q<CR>
+noremap <Leader>w :w<CR>
 
 
 " ----- Settings ----- "
