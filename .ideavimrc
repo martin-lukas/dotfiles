@@ -3,6 +3,15 @@ packadd matchit
 
 
 " ----- Mappings ----- "
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+inoremap <Up> <NOP>
+inoremap <Down> <NOP>
+inoremap <Left> <NOP>
+inoremap <Right> <NOP>
+
 inoremap jk <Esc>
 noremap <C-L> :nohlsearch<CR><C-L>
 let mapleader = " "
