@@ -10,6 +10,15 @@ call plug#end()
 
 
 " ----- Mappings ----- "
+nnoremap <Up> <NOP>
+nnoremap <Down> <NOP>
+nnoremap <Left> <NOP>
+nnoremap <Right> <NOP>
+inoremap <Up> <NOP>
+inoremap <Down> <NOP>
+inoremap <Left> <NOP>
+inoremap <Right> <NOP>
+
 inoremap jk <Esc>
 noremap <C-L> :nohlsearch<CR><C-L>
 let mapleader = " "
