@@ -10,9 +10,9 @@ call plug#end()
 
 
 " ----- Mappings ----- "
-let mapleader = " "
-noremap <C-L> :nohlsearch<CR><C-L>
 inoremap jk <Esc>
+noremap <C-L> :nohlsearch<CR><C-L>
+let mapleader = " "
 noremap <Leader>b :ls<CR>:b<Space>
 noremap <Leader>d :bd<CR>
 noremap <Leader>q :q<CR>
