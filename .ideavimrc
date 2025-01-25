@@ -3,15 +3,17 @@ packadd matchit
 
 
 " ----- Mappings ----- "
+inoremap jk <Esc>
+noremap <C-L> :nohlsearch<CR><C-L>
 let mapleader = " "
-map <C-L> :nohlsearch<CR><C-L>
-map <Leader>a <Action>(Vcs.ShowHistoryForBlock)
-map <Leader>b :ls<CR>:b<Space>
-map <Leader>d :bd<CR>
-map <Leader>e <Action>(RecentFiles)
-map <Leader>j <Action>(QuickJavaDoc)
-map <Leader>w :w<CR>
-map <Leader>x <Action>(SelectInProjectView)
+noremap <Leader>b :ls<CR>:b<Space>
+noremap <Leader>d :bd<CR>
+noremap <Leader>q :q<CR>
+noremap <Leader>w :w<CR>
+noremap <Leader>a <Action>(Vcs.ShowHistoryForBlock)
+noremap <Leader>e <Action>(RecentFiles)
+noremap <Leader>j <Action>(QuickJavaDoc)
+noremap <Leader>x <Action>(SelectInProjectView)
 
 
 " ----- Settings ----- "
