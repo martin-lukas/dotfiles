@@ -17,7 +17,6 @@ noremap <C-L> :nohlsearch<CR><C-L>
 let mapleader = " "
 noremap <Leader>b :ls<CR>:b<Space>
 noremap <Leader>d :bd<CR>
-noremap <Leader>q :q<CR>
 noremap <Leader>w :w<CR>
 map <Leader>a <Action>(Vcs.ShowHistoryForBlock)
 map <Leader>e <Action>(RecentFiles)
