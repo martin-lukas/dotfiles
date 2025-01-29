@@ -28,6 +28,7 @@ map <Leader>x <Action>(SelectInProjectView)
 set relativenumber
 set hlsearch
 set incsearch
+set ignorecase
 set colorcolumn=100
 set scrolloff=5
 
