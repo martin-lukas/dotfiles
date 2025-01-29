@@ -2,7 +2,7 @@
 " (takes care of syntax and filetype detection)
 call plug#begin()
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
-Plug 'tpope/vim-sensible' " Sensible defaults (backspace, incsearch, autoread, % impr.)
+Plug 'tpope/vim-sensible' " Sensible defaults (backspace, autoread, % impr.)
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-python/python-syntax'
@@ -41,7 +41,11 @@ set expandtab
 set autoindent
 set smartindent
 set hlsearch
+set incsearch
+set ignorecase
 set colorcolumn=100
+" treat numbers with leading 0 as decimals
+set nrformats=
 
 
 " ----- Theme ----- "
