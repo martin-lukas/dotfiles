@@ -21,7 +21,7 @@ inoremap <Right> <NOP>
 
 inoremap jk <Esc>
 noremap <C-L> :nohlsearch<CR><C-L>
-let mapleader = " "
+let mapleader = "\<Space>"
 noremap <Leader>b :ls<CR>:b<Space>
 noremap <Leader>d :bd<CR>
 noremap <Leader>q :q<CR>
