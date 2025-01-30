@@ -23,9 +23,9 @@ inoremap jk <Esc>
 noremap <C-L> :nohlsearch<CR><C-L>
 let mapleader = "\<Space>"
 noremap <Leader>b :ls<CR>:b<Space>
-noremap <Leader>d :bd<CR>
 noremap <Leader>q :q<CR>
 noremap <Leader>w :w<CR>
+noremap <Leader>r :make<CR>
 
 
 " ----- Settings ----- "
