@@ -23,9 +23,9 @@ inoremap jk <Esc>
 noremap <C-L> :nohlsearch<CR><C-L>
 let mapleader = "\<Space>"
 noremap <Leader>b :ls<CR>:b<Space>
+noremap <Leader>c :bd<CR>
 noremap <Leader>q :q<CR>
 noremap <Leader>w :w<CR>
-noremap <Leader>r :make<CR>
 
 
 " ----- Settings ----- "
@@ -46,6 +46,8 @@ set ignorecase
 set colorcolumn=100
 " treat numbers with leading 0 as decimals
 set nrformats=
+set splitbelow
+set splitright
 
 
 " ----- Theme ----- "
@@ -64,3 +66,12 @@ if has("autocmd")
       \     exe "normal! g`\"" |
       \ endif
 endif
+
+
+" Create a command for custom run configuration
+function! SetRunCmd(cmd)
+      execute 'noremap <Leader>r :w<CR>:term ' . a:cmd . '<CR>'
+endfunction
+
+command! -nargs=1 RunCmd call SetRunCmd(<q-args>)
+

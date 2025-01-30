@@ -15,12 +15,13 @@ inoremap <Right> <NOP>
 inoremap jk <Esc>
 noremap <C-L> :nohlsearch<CR><C-L>
 let mapleader = "\<Space>"
+noremap <Leader>c <C-W>c<CR>
 map <Leader>a <Action>(Vcs.ShowHistoryForBlock)
+map <Leader>d <Action>(Debug)
 map <Leader>e <Action>(RecentFiles)
 map <Leader>j <Action>(QuickJavaDoc)
-map <Leader>x <Action>(SelectInProjectView)
 map <Leader>r <Action>(Run)
-map <Leader>d <Action>(Debug)
+map <Leader>x <Action>(SelectInProjectView)
 
 
 " ----- Settings ----- "
@@ -30,6 +31,8 @@ set incsearch
 set ignorecase
 set colorcolumn=100
 set scrolloff=5
+set splitbelow
+set splitright
 
 
 " If the file was opened before, jump to the last viewed/edited line in it.
