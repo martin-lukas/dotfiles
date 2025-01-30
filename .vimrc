@@ -24,7 +24,6 @@ noremap <C-L> :nohlsearch<CR><C-L>
 let mapleader = "\<Space>"
 noremap <Leader>b :ls<CR>:b<Space>
 noremap <Leader>c :bd<CR>
-noremap <Leader>q :q<CR>
 noremap <Leader>w :w<CR>
 
 
@@ -48,6 +47,7 @@ set colorcolumn=100
 set nrformats=
 set splitbelow
 set splitright
+set hidden
 
 
 " ----- Theme ----- "
