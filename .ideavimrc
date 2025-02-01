@@ -25,7 +25,6 @@ map <Leader>x <Action>(SelectInProjectView)
 
 
 " ----- Settings ----- "
-set relativenumber
 set hlsearch
 set incsearch
 set ignorecase
