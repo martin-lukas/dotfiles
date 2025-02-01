@@ -31,7 +31,6 @@ noremap <Leader>w :w<CR>
 language en_US.UTF-8
 set nocompatible
 set number
-set relativenumber
 set scrolloff=5
 set ruler
 set tabstop=4
