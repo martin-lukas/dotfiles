@@ -22,7 +22,7 @@
     st = status
     ss = st -sb
     lg = log --oneline --graph --decorate --all
-    d = diff --unified=10
+    d = diff --unified=10 HEAD
     a = add -A
     c = commit
     ac = !git a && git c
