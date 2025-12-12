@@ -2,30 +2,7 @@
 " (takes care of syntax and filetype detection)
 call plug#begin()
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
-Plug 'tpope/vim-sensible' " Sensible defaults (backspace, autoread, % impr.)
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'vim-python/python-syntax'
 call plug#end()
-
-
-" ----- Mappings ----- "
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
-inoremap <Up> <NOP>
-inoremap <Down> <NOP>
-inoremap <Left> <NOP>
-inoremap <Right> <NOP>
-
-inoremap jk <Esc>
-noremap <C-L> :nohlsearch<CR><C-L>
-let mapleader = "\<Space>"
-noremap <Leader>b :ls<CR>:b<Space>
-noremap <Leader>c :bd<CR>
-noremap <Leader>w :w<CR>
-
 
 " ----- Settings ----- "
 language en_US.UTF-8
@@ -38,10 +15,7 @@ set shiftwidth=4
 set expandtab
 set autoindent
 set smartindent
-set hlsearch
-set incsearch
 set ignorecase
-set colorcolumn=100
 " treat numbers with leading 0 as decimals
 set nrformats=
 set splitbelow
