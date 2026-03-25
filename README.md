@@ -23,6 +23,15 @@ These files are sourced automatically but not tracked in git — create them on 
 
 Use these for machine-specific PATH additions, credentials, and tool configs (Docker, Python versions, VS Code, Coursier, etc.).
 
+## Manual steps (macOS)
+
+Things not automated by `bootstrap.sh`:
+
+- **VS Code key repeat** — if using VS Code, run once after install:
+  ```bash
+  defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+  ```
+
 ## Related
 
 - [martin-lukas/claude](https://github.com/martin-lukas/claude) — Claude Code config (`settings.json`, statusline). Run its `install.sh` separately after this one.
