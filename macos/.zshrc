@@ -6,12 +6,13 @@ setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
 setopt INC_APPEND_HISTORY        # write immediately, not on shell exit
 
-export PROMPT_EOL_MARK=''        # don't show % on partial lines
+export PROMPT_EOL_MARK=''        # suppress the % marker shown on lines without a trailing newline
 
 # Colors
 export CLICOLOR=1
 
 # Prompt with git branch
+# vcs_info is zsh's built-in VCS integration — populates vcs_info_msg_0_ before each prompt
 autoload -Uz vcs_info
 zstyle ':vcs_info:git:*' formats ' (%b)'
 precmd() { vcs_info }

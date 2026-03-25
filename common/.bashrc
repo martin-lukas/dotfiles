@@ -1,22 +1,23 @@
-# ~/.bashrc — interactive bash config (WSL + Linux)
+# ~/.bashrc — interactive bash config (WSL, Linux, Termux)
 
-# Early exit for non-interactive shells
+# Skip entirely for non-interactive shells (e.g. scp, scripts)
 case $- in *i*) ;; *) return;; esac
 
 # --- History ---
 HISTCONTROL=ignoreboth              # ignore duplicates + lines starting with space
 HISTSIZE=1000000
 HISTFILESIZE=1000000
-HISTTIMEFORMAT="%F %T "             # timestamp every command: 2026-03-25 21:05:33
-shopt -s histappend                 # append to history file, don't overwrite
-# Write each command to history immediately (not on shell exit)
+HISTTIMEFORMAT="%F %T "             # timestamp every entry: 2026-03-25 21:05:33
+shopt -s histappend                 # append to history file instead of overwriting
+# Flush each command to history immediately so it's available in other sessions
 PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }history -a"
 
 # --- Terminal ---
-shopt -s checkwinsize               # update LINES/COLUMNS after each command
+shopt -s checkwinsize               # recheck terminal size after each command, keeps LINES/COLUMNS accurate
 
 # --- Color prompt ---
-# Load git prompt if available
+# Try to source git-prompt.sh, which provides __git_ps1 for branch display in prompt.
+# Check all known locations across Linux distros, Homebrew (macOS), and Termux.
 for _git_prompt in \
     /usr/share/git-core/contrib/completion/git-prompt.sh \
     /usr/lib/git-core/git-sh-prompt \
@@ -27,10 +28,10 @@ for _git_prompt in \
 done
 unset _git_prompt
 
-GIT_PS1_SHOWDIRTYSTATE=1
-GIT_PS1_SHOWUNTRACKEDFILES=1
+GIT_PS1_SHOWDIRTYSTATE=1            # show * for unstaged, + for staged changes
+GIT_PS1_SHOWUNTRACKEDFILES=1        # show % when untracked files are present
 
-# Fallback if git-prompt.sh wasn't found
+# Minimal fallback __git_ps1 if git-prompt.sh wasn't found (e.g. Termux)
 if ! declare -f __git_ps1 > /dev/null; then
     __git_ps1() {
         local branch
@@ -39,8 +40,10 @@ if ! declare -f __git_ps1 > /dev/null; then
     }
 fi
 
-if [ -x /usr/bin/tput ] && tput setaf 1 &>/dev/null; then
+# tput setaf 1: test whether the terminal supports ANSI colors (exit 0 if yes)
+if tput setaf 1 &>/dev/null; then
     if [ -n "${TERMUX_VERSION:-}" ]; then
+        # Termux: replace unreadable Android user/hostname with 'termux'
         PS1='\[\033[01;32m\]termux\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " (%s)")\$ '
     else
         PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " (%s)")\$ '
@@ -50,6 +53,7 @@ else
 fi
 
 # --- Colors ---
+# dircolors sets LS_COLORS so ls/grep/etc. use colored output
 if [ -x /usr/bin/dircolors ]; then
     eval "$(dircolors -b)"
 fi
@@ -63,6 +67,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export EDITOR=$(command -v vim || command -v vi)
 
 # --- Bash completion ---
+# Enable tab-completion for commands, flags, and arguments
 if ! shopt -oq posix; then
     if [ -f /usr/share/bash-completion/bash_completion ]; then
         . /usr/share/bash-completion/bash_completion
@@ -82,6 +87,9 @@ if grep -qi microsoft /proc/version 2>/dev/null; then
 fi
 
 # --- SSH agent ---
+# Start a persistent SSH agent if one isn't already running, and reuse it
+# across sessions via a saved env file. Without this, the agent would need
+# to be started manually each time (especially on Termux).
 _SSH_ENV="$HOME/.ssh/agent-env"
 _start_ssh_agent() {
     ssh-agent > "$_SSH_ENV"
@@ -90,6 +98,7 @@ _start_ssh_agent() {
 }
 if [ -f "$_SSH_ENV" ]; then
     . "$_SSH_ENV" > /dev/null
+    # ssh-add -l exit code 2 means agent is unreachable — restart it
     ssh-add -l &>/dev/null || _start_ssh_agent
 else
     _start_ssh_agent
