@@ -9,6 +9,7 @@ SKIP_SSH=false
 for arg in "$@"; do
     case "$arg" in
         --skip-ssh) SKIP_SSH=true ;;
+        *) echo "Unknown flag: $arg"; exit 1 ;;
     esac
 done
 
