@@ -51,5 +51,6 @@ if [[ "$CONTEXT" == "macos" ]]; then
     echo "   source ~/.zprofile   # PATH, Homebrew (login shell changes)"
     echo "   source ~/.zshrc      # prompt, aliases"
 else
-    echo " To apply shell changes: source ~/.bashrc"
+    echo " To apply shell changes:"
+    echo "   source ~/.bashrc"
 fi
