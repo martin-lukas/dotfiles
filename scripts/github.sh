@@ -17,7 +17,7 @@ fi
 # Add key if not already loaded
 KEY_FP="$(ssh-keygen -lf ~/.ssh/github 2>/dev/null | awk '{print $2}')"
 if ssh-add -l 2>/dev/null | grep -q "$KEY_FP"; then
-    skip "SSH key already in agent"
+    pass "SSH key in agent"
 else
     if ssh-add ~/.ssh/github 2>/dev/null; then
         pass "SSH key added to agent"

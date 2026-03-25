@@ -3,9 +3,7 @@
 
 _symlink() {
     local src="$1" dst="$2" label="$3"
-    if [ -L "$dst" ] && [ "$(readlink "$dst")" = "$src" ]; then
-        skip "$label (already linked)"
-    elif [ -e "$dst" ] && [ ! -L "$dst" ]; then
+    if [ -e "$dst" ] && [ ! -L "$dst" ]; then
         fail "$label — real file exists at $dst, remove it to allow symlinking"
     else
         ln -sf "$src" "$dst"

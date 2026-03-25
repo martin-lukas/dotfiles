@@ -6,14 +6,12 @@ export DOTFILES
 
 # --- Status tracking (shared with all scripts) ---
 declare -a OK=()
-declare -a SKIP=()
 declare -a FAIL=()
 
 pass() { OK+=("  [✓] $1"); }
-skip() { SKIP+=("  [-] $1"); }
 fail() { FAIL+=("  [!] $1"); }
 
-export -f pass skip fail
+export -f pass fail
 
 # --- Context detection ---
 if grep -qi microsoft /proc/version 2>/dev/null; then
@@ -36,7 +34,6 @@ echo "========================================"
 echo " dotfiles install — $CONTEXT"
 echo "========================================"
 for msg in "${OK[@]:-}";   do echo "$msg"; done
-for msg in "${SKIP[@]:-}"; do echo "$msg"; done
 for msg in "${FAIL[@]:-}"; do echo "$msg"; done
 echo ""
 if [ ${#FAIL[@]} -eq 0 ]; then
