@@ -47,10 +47,10 @@ fi
 echo "========================================"
 echo ""
 if [[ "$CONTEXT" == "macos" ]]; then
-    echo " To apply shell changes:"
-    echo "   source ~/.zprofile   # PATH, Homebrew (login shell changes)"
-    echo "   source ~/.zshrc      # prompt, aliases"
+    echo "To apply shell changes:"
+    echo "source ~/.zprofile   # PATH, Homebrew (login shell changes)"
+    echo "source ~/.zshrc      # prompt, aliases"
 else
-    echo " To apply shell changes:"
-    echo "   source ~/.bashrc"
+    echo "To apply shell changes:"
+    echo "source ~/.bashrc"
 fi
