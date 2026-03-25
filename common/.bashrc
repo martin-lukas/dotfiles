@@ -33,7 +33,7 @@ alias ip='ip --color=auto'
 
 # --- PATH & editor ---
 export PATH="$HOME/.local/bin:$PATH"
-export EDITOR=vim
+export EDITOR=$(command -v vim || command -v vi)
 
 # --- Bash completion ---
 if ! shopt -oq posix; then
