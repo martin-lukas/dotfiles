@@ -43,9 +43,9 @@ fi
 # Prompt symbol: green ❯ on success, red ❯ on failure
 __prompt_symbol() {
     if [ "${__exit_code:-0}" -eq 0 ]; then
-        printf '\[\033[01;32m\]❯\[\033[00m\]'
+        printf '\001\033[01;32m\002❯\001\033[00m\002'
     else
-        printf '\[\033[01;31m\]❯\[\033[00m\]'
+        printf '\001\033[01;31m\002❯\001\033[00m\002'
     fi
 }
 
