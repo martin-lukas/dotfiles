@@ -18,7 +18,6 @@ Run bootstrap before install — bootstrap installs the tools (openssh, vim, etc
 
 ```bash
 git clone https://github.com/martin-lukas/dotfiles.git ~/dotfiles
-cd ~/dotfiles
 ```
 
 **Step 3 — bootstrap** (installs packages):
