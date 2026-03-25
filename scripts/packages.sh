@@ -27,6 +27,17 @@ _brew_install() {
     fi
 }
 
+_brew_cask_install() {
+    local pkg="$1"
+    if brew list --cask "$pkg" &>/dev/null; then
+        pass "$pkg (already installed)"
+    elif brew install --cask "$pkg" &>/dev/null; then
+        pass "$pkg"
+    else
+        fail "$pkg — brew cask install failed"
+    fi
+}
+
 case "$CONTEXT" in
     wsl|linux)
         sudo apt-get update -qq
@@ -57,6 +68,7 @@ case "$CONTEXT" in
         _brew_install fzf
         _brew_install tree
         _brew_install ripgrep rg
+        _brew_cask_install maccy
         # Xcode CLI tools provide compilers on macOS (replaces build-essential)
         if xcode-select -p &>/dev/null; then
             pass "Xcode CLI tools (already installed)"
