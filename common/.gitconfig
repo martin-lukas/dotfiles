@@ -35,3 +35,6 @@
     pf  = p --force-with-lease          # safer force push — fails if remote has new commits
     f   = fetch
     pl  = pull --rebase
+
+[include]
+    path = ~/.gitconfig.local

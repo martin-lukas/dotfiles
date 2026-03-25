@@ -4,8 +4,10 @@
 _symlink() {
     local src="$1" dst="$2" label="$3"
     if [ -e "$dst" ] && [ ! -L "$dst" ]; then
-        fail "$label — real file exists at $dst, remove it to allow symlinking"
-    elif [ -L "$dst" ] && [ "$(readlink "$dst")" = "$src" ]; then
+        doing "Backing up existing $label to ${dst}.local"
+        mv "$dst" "${dst}.local"
+    fi
+    if [ -L "$dst" ] && [ "$(readlink "$dst")" = "$src" ]; then
         pass "$label"
     else
         doing "Symlinking $label"

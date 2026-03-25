@@ -16,3 +16,8 @@ autocmd BufReadPost *
   \ if line("'\"") > 0 && line("'\"") <= line("$") |
   \     exe "normal! g`\"" |
   \ endif
+
+" Machine-specific overrides (not tracked in git)
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
+endif

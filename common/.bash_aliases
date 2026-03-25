@@ -9,3 +9,6 @@ alias ....='cd ../../..'
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
+
+# Machine-specific aliases (not tracked in git)
+[ -f ~/.bash_aliases.local ] && . ~/.bash_aliases.local
