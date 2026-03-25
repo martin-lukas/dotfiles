@@ -45,3 +45,11 @@ else
     echo " ${#FAIL[@]} item(s) need attention (see [!] above)"
 fi
 echo "========================================"
+echo ""
+if [[ "$CONTEXT" == "macos" ]]; then
+    echo " To apply shell changes:"
+    echo "   source ~/.zprofile   # PATH, Homebrew (login shell changes)"
+    echo "   source ~/.zshrc      # prompt, aliases"
+else
+    echo " To apply shell changes: source ~/.bashrc"
+fi
