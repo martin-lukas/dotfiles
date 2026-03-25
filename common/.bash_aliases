@@ -1,5 +1,5 @@
 # Navigation
-alias ll='ls -alF'
+alias ll='ls -alhF'
 alias la='ls -A'
 alias ..='cd ..'
 alias ...='cd ../..'
