@@ -16,10 +16,28 @@ PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }history -a"
 shopt -s checkwinsize               # update LINES/COLUMNS after each command
 
 # --- Color prompt ---
+# Load git prompt if available
+for _git_prompt in \
+    /usr/share/git-core/contrib/completion/git-prompt.sh \
+    /usr/lib/git-core/git-sh-prompt \
+    /etc/bash_completion.d/git-prompt \
+    /opt/homebrew/etc/bash_completion.d/git-prompt.sh \
+    "$PREFIX/share/git/git-prompt.sh"; do
+    [ -f "$_git_prompt" ] && { . "$_git_prompt"; break; }
+done
+unset _git_prompt
+
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWUNTRACKEDFILES=1
+
 if [ -x /usr/bin/tput ] && tput setaf 1 &>/dev/null; then
-    PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    if [ -n "${TERMUX_VERSION:-}" ]; then
+        PS1='\[\033[01;32m\]termux\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " (%s)")\$ '
+    else
+        PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " (%s)")\$ '
+    fi
 else
-    PS1='\u@\h:\w\$ '
+    PS1='\u@\h:\w$(__git_ps1 " (%s)")\$ '
 fi
 
 # --- Colors ---
