@@ -22,8 +22,13 @@ _symlink "$DOTFILES/common/.ssh/config"   ~/.ssh/config   "~/.ssh/config"
 
 # Context-specific
 case "$CONTEXT" in
-    wsl|linux)
+    wsl|linux|termux)
         _symlink "$DOTFILES/common/.bashrc" ~/.bashrc ".bashrc"
+        if [[ "$CONTEXT" == "termux" ]]; then
+            mkdir -p ~/.termux
+            _symlink "$DOTFILES/termux/termux.properties" ~/.termux/termux.properties "termux.properties"
+            termux-reload-settings && pass "termux settings reloaded" || fail "termux-reload-settings failed"
+        fi
         ;;
     macos)
         _symlink "$DOTFILES/macos/.zprofile" ~/.zprofile ".zprofile"

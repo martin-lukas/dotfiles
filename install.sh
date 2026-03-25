@@ -14,7 +14,9 @@ fail() { FAIL+=("  [!] $1"); }
 export -f pass fail
 
 # --- Context detection ---
-if grep -qi microsoft /proc/version 2>/dev/null; then
+if [ -n "${TERMUX_VERSION:-}" ]; then
+    CONTEXT="termux"
+elif grep -qi microsoft /proc/version 2>/dev/null; then
     CONTEXT="wsl"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     CONTEXT="macos"

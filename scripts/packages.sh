@@ -39,6 +39,18 @@ _brew_cask_install() {
 }
 
 case "$CONTEXT" in
+    termux)
+        # pkg is Termux's package manager — no sudo needed
+        pkg update -y &>/dev/null
+        pkg upgrade -y &>/dev/null
+        pkg install -y vim fzf tree ripgrep openssh build-essential &>/dev/null
+        pass "packages installed (termux)"
+        if [ -d ~/storage/shared ]; then
+            pass "storage access granted"
+        else
+            fail "storage not set up — run 'termux-setup-storage' manually (triggers Android permission dialog)"
+        fi
+        ;;
     wsl|linux)
         sudo apt-get update -qq
         _apt_install vim

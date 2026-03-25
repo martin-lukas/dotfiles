@@ -23,6 +23,13 @@ These files are sourced automatically but not tracked in git — create them on 
 
 Use these for machine-specific PATH additions, credentials, and tool configs (Docker, Python versions, VS Code, Coursier, etc.).
 
+## Manual steps (Termux)
+
+- **Mirror selection** — run once before installing packages to pick a nearby mirror:
+  ```bash
+  termux-change-repo
+  ```
+
 ## Manual steps (macOS)
 
 Things not automated by `bootstrap.sh`:
