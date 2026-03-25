@@ -15,9 +15,10 @@ _symlink() {
 }
 
 # Common — all platforms
+_symlink "$DOTFILES/common/.bash_aliases" ~/.bash_aliases ".bash_aliases"
 _symlink "$DOTFILES/common/.gitconfig"    ~/.gitconfig    ".gitconfig"
 _symlink "$DOTFILES/common/.vimrc"        ~/.vimrc        ".vimrc"
-_symlink "$DOTFILES/common/.bash_aliases" ~/.bash_aliases ".bash_aliases"
+_symlink "$DOTFILES/common/.tmux.conf"    ~/.tmux.conf    ".tmux.conf"
 
 mkdir -p ~/.ssh && chmod 700 ~/.ssh
 chmod 600 "$DOTFILES/common/.ssh/config"

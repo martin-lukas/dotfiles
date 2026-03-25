@@ -68,6 +68,7 @@ case "$CONTEXT" in
         pkg update -y &>/dev/null
         pkg upgrade -y &>/dev/null
         _pkg_install vim
+        _pkg_install tmux
         _pkg_install fzf
         _pkg_install tree
         _pkg_install ripgrep rg
@@ -84,6 +85,7 @@ case "$CONTEXT" in
         doing "Updating apt package lists"
         sudo apt-get update -qq
         _apt_install vim
+        _apt_install tmux
         _apt_install fzf
         _apt_install tree
         _apt_install ripgrep rg
@@ -107,6 +109,7 @@ case "$CONTEXT" in
             pass "Homebrew (already installed)"
         fi
         _brew_install vim
+        _brew_install tmux
         _brew_install fzf
         _brew_install tree
         _brew_install ripgrep rg
