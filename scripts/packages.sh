@@ -5,6 +5,20 @@ _installed() {
     command -v "$1" &>/dev/null
 }
 
+_pkg_install() {
+    local pkg="$1" cmd="${2:-$1}"
+    if _installed "$cmd"; then
+        pass "$cmd (already installed)"
+    else
+        doing "Installing $pkg"
+        if pkg install -y "$pkg" &>/dev/null; then
+            pass "$cmd"
+        else
+            fail "$cmd — pkg install failed"
+        fi
+    fi
+}
+
 _apt_install() {
     local pkg="$1" cmd="${2:-$1}"
     if _installed "$cmd"; then
@@ -50,11 +64,15 @@ _brew_cask_install() {
 case "$CONTEXT" in
     termux)
         # pkg is Termux's package manager — no sudo needed
-        doing "Updating and installing packages (termux)"
+        doing "Updating packages (termux)"
         pkg update -y &>/dev/null
         pkg upgrade -y &>/dev/null
-        pkg install -y vim fzf tree ripgrep openssh build-essential &>/dev/null
-        pass "packages installed (termux)"
+        _pkg_install vim
+        _pkg_install fzf
+        _pkg_install tree
+        _pkg_install ripgrep rg
+        _pkg_install openssh ssh
+        _pkg_install build-essential gcc
         if [ -d ~/storage/shared ]; then
             pass "storage access granted"
         else
