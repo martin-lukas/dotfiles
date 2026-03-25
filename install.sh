@@ -2,34 +2,46 @@
 set -euo pipefail
 
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+export DOTFILES
 
-detect_context() {
-    if grep -qi microsoft /proc/version 2>/dev/null; then echo "wsl"
-    elif [[ "$OSTYPE" == "darwin"* ]];                  then echo "macos"
-    else                                                      echo "linux"
-    fi
-}
+# --- Status tracking (shared with all scripts) ---
+declare -a OK=()
+declare -a SKIP=()
+declare -a FAIL=()
 
-CONTEXT=$(detect_context)
-echo "==> Detected: $CONTEXT"
+pass() { OK+=("  [✓] $1"); }
+skip() { SKIP+=("  [-] $1"); }
+fail() { FAIL+=("  [!] $1"); }
 
-# Always — common configs
-ln -sf "$DOTFILES/common/.gitconfig"    ~/.gitconfig
-ln -sf "$DOTFILES/common/.vimrc"        ~/.vimrc
-ln -sf "$DOTFILES/common/.bash_aliases" ~/.bash_aliases
+export -f pass skip fail
 
-case "$CONTEXT" in
-    wsl|linux)
-        ln -sf "$DOTFILES/common/.bashrc" ~/.bashrc
-        if [[ "$CONTEXT" == "wsl" ]]; then
-            sudo cp "$DOTFILES/wsl/wsl.conf" /etc/wsl.conf
-            echo "    wsl.conf installed — run 'wsl --shutdown' from PowerShell to apply"
-        fi
-        ;;
-    macos)
-        ln -sf "$DOTFILES/macos/.zprofile" ~/.zprofile
-        ln -sf "$DOTFILES/macos/.zshrc"    ~/.zshrc
-        ;;
-esac
+# --- Context detection ---
+if grep -qi microsoft /proc/version 2>/dev/null; then
+    CONTEXT="wsl"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    CONTEXT="macos"
+else
+    CONTEXT="linux"
+fi
+export CONTEXT
 
-echo "==> Done ($CONTEXT)"
+# --- Run modules ---
+. "$DOTFILES/scripts/symlinks.sh"
+. "$DOTFILES/scripts/github.sh"
+[[ "$CONTEXT" == "wsl" ]] && . "$DOTFILES/scripts/wsl.sh"
+
+# --- Summary ---
+echo ""
+echo "========================================"
+echo " dotfiles install — $CONTEXT"
+echo "========================================"
+for msg in "${OK[@]:-}";   do echo "$msg"; done
+for msg in "${SKIP[@]:-}"; do echo "$msg"; done
+for msg in "${FAIL[@]:-}"; do echo "$msg"; done
+echo ""
+if [ ${#FAIL[@]} -eq 0 ]; then
+    echo " All done!"
+else
+    echo " ${#FAIL[@]} item(s) need attention (see [!] above)"
+fi
+echo "========================================"
