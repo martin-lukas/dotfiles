@@ -53,3 +53,6 @@ if grep -qi microsoft /proc/version 2>/dev/null; then
     alias cdw='cd /mnt/c/Users/mail'
     alias cdd='cd /mnt/c/Users/mail/Desktop'
 fi
+
+# --- Machine-specific overrides (not tracked in git) ---
+[ -f ~/.bashrc.local ] && . ~/.bashrc.local
