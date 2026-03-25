@@ -114,5 +114,10 @@ else
 fi
 unset _SSH_ENV
 
+# --- fzf (Ctrl+R history search, Ctrl+T file search, Alt+C cd) ---
+if command -v fzf &>/dev/null; then
+    eval "$(fzf --bash)"
+fi
+
 # --- Machine-specific overrides (not tracked in git) ---
 if [ -f ~/.bashrc.local ]; then . ~/.bashrc.local; fi

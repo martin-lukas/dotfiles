@@ -23,5 +23,10 @@ export PROMPT='%F{green}%n@%m%f:%F{blue}%~%f%F{yellow}${vcs_info_msg_0_}%f
 # Shared aliases (compatible with zsh)
 [ -f ~/dotfiles/common/.bash_aliases ] && source ~/dotfiles/common/.bash_aliases
 
+# fzf (Ctrl+R history search, Ctrl+T file search, Alt+C cd)
+if command -v fzf &>/dev/null; then
+    eval "$(fzf --zsh)"
+fi
+
 # Machine-specific overrides (not tracked in git)
 if [ -f ~/.zshrc.local ]; then source ~/.zshrc.local; fi
