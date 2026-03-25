@@ -4,6 +4,14 @@ set -euo pipefail
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 export DOTFILES
 
+# --- Flags ---
+SKIP_SSH=false
+for arg in "$@"; do
+    case "$arg" in
+        --skip-ssh) SKIP_SSH=true ;;
+    esac
+done
+
 # --- Status tracking (shared with all scripts) ---
 declare -a OK=()
 declare -a FAIL=()
@@ -28,7 +36,11 @@ export CONTEXT
 
 # --- Run modules ---
 . "$DOTFILES/scripts/symlinks.sh"
-. "$DOTFILES/scripts/github.sh"
+if [ "$SKIP_SSH" = false ]; then
+    . "$DOTFILES/scripts/github.sh"
+else
+    pass "SSH setup (skipped)"
+fi
 [[ "$CONTEXT" == "wsl" ]] && . "$DOTFILES/scripts/wsl.sh"
 
 # --- Summary ---

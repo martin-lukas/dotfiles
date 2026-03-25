@@ -22,9 +22,13 @@ _symlink "$DOTFILES/common/.gitconfig"    ~/.gitconfig    ".gitconfig"
 _symlink "$DOTFILES/common/.vimrc"        ~/.vimrc        ".vimrc"
 _symlink "$DOTFILES/common/.tmux.conf"    ~/.tmux.conf    ".tmux.conf"
 
-mkdir -p ~/.ssh && chmod 700 ~/.ssh
-chmod 600 "$DOTFILES/common/.ssh/config"
-_symlink "$DOTFILES/common/.ssh/config"   ~/.ssh/config   "~/.ssh/config"
+if [ "${SKIP_SSH:-false}" = false ]; then
+    mkdir -p ~/.ssh && chmod 700 ~/.ssh
+    chmod 600 "$DOTFILES/common/.ssh/config"
+    _symlink "$DOTFILES/common/.ssh/config" ~/.ssh/config "~/.ssh/config"
+else
+    pass "~/.ssh/config (skipped)"
+fi
 
 # Context-specific
 case "$CONTEXT" in
