@@ -6,8 +6,11 @@ if [ ! -f ~/.ssh/github ]; then
     return
 fi
 
-doing "Setting GitHub SSH key permissions"
-chmod 600 ~/.ssh/github
+CURRENT_PERMS="$(stat -c '%a' ~/.ssh/github 2>/dev/null || stat -f '%A' ~/.ssh/github 2>/dev/null)"
+if [ "$CURRENT_PERMS" != "600" ]; then
+    doing "Setting GitHub SSH key permissions"
+    chmod 600 ~/.ssh/github
+fi
 pass "GitHub SSH key found"
 
 # Start agent if not already running in this session

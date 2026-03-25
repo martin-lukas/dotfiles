@@ -1,9 +1,13 @@
 # WSL-specific setup.
 # Sourced by install.sh — inherits DOTFILES, CONTEXT, pass/skip/fail.
 
-doing "Installing wsl.conf"
-if sudo cp "$DOTFILES/wsl/wsl.conf" /etc/wsl.conf 2>/dev/null; then
-    pass "wsl.conf installed (run 'wsl --shutdown' from PowerShell to apply)"
+if diff -q "$DOTFILES/wsl/wsl.conf" /etc/wsl.conf &>/dev/null; then
+    pass "wsl.conf"
 else
-    fail "wsl.conf — sudo required: run 'sudo cp $DOTFILES/wsl/wsl.conf /etc/wsl.conf'"
+    doing "Installing wsl.conf"
+    if sudo cp "$DOTFILES/wsl/wsl.conf" /etc/wsl.conf 2>/dev/null; then
+        pass "wsl.conf installed (run 'wsl --shutdown' from PowerShell to apply)"
+    else
+        fail "wsl.conf — sudo required: run 'sudo cp $DOTFILES/wsl/wsl.conf /etc/wsl.conf'"
+    fi
 fi

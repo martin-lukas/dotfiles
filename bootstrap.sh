@@ -8,10 +8,11 @@ export DOTFILES
 declare -a OK=()
 declare -a FAIL=()
 
-pass() { OK+=("  [✓] $1"); }
-fail() { FAIL+=("  [!] $1"); }
+pass()  { OK+=("  [✓] $1"); }
+fail()  { FAIL+=("  [!] $1"); }
+doing() { echo "  $1..."; }
 
-export -f pass fail
+export -f pass fail doing
 
 # --- Context detection ---
 if [ -n "${TERMUX_VERSION:-}" ]; then

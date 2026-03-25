@@ -2,19 +2,28 @@
 # Sourced by bootstrap.sh — inherits DOTFILES, CONTEXT, pass/fail.
 
 # Show hidden files in Finder
-doing "Finder: enabling hidden files"
-if defaults write com.apple.Finder AppleShowAllFiles true 2>/dev/null; then
+if [ "$(defaults read com.apple.Finder AppleShowAllFiles 2>/dev/null)" = "1" ] || \
+   [ "$(defaults read com.apple.Finder AppleShowAllFiles 2>/dev/null)" = "true" ]; then
     pass "Finder: show hidden files"
 else
-    fail "Finder: show hidden files — defaults write failed"
+    doing "Finder: enabling hidden files"
+    if defaults write com.apple.Finder AppleShowAllFiles true 2>/dev/null; then
+        pass "Finder: show hidden files"
+    else
+        fail "Finder: show hidden files — defaults write failed"
+    fi
 fi
 
 # Enable key repeat globally (disable press-and-hold accent menu)
-doing "Keyboard: enabling key repeat"
-if defaults write -g ApplePressAndHoldEnabled -bool false 2>/dev/null; then
+if [ "$(defaults read -g ApplePressAndHoldEnabled 2>/dev/null)" = "0" ]; then
     pass "Keyboard: key repeat enabled"
 else
-    fail "Keyboard: key repeat — defaults write failed"
+    doing "Keyboard: enabling key repeat"
+    if defaults write -g ApplePressAndHoldEnabled -bool false 2>/dev/null; then
+        pass "Keyboard: key repeat enabled"
+    else
+        fail "Keyboard: key repeat — defaults write failed"
+    fi
 fi
 
 # Prevent Apple Music from launching on media key press
