@@ -30,6 +30,15 @@ unset _git_prompt
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWUNTRACKEDFILES=1
 
+# Fallback if git-prompt.sh wasn't found
+if ! declare -f __git_ps1 > /dev/null; then
+    __git_ps1() {
+        local branch
+        branch="$(git symbolic-ref --short HEAD 2>/dev/null)" || return
+        printf "${1:- (%s)}" "$branch"
+    }
+fi
+
 if [ -x /usr/bin/tput ] && tput setaf 1 &>/dev/null; then
     if [ -n "${TERMUX_VERSION:-}" ]; then
         PS1='\[\033[01;32m\]termux\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " (%s)")\$ '

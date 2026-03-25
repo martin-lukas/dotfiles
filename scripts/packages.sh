@@ -72,6 +72,7 @@ case "$CONTEXT" in
         _pkg_install tree
         _pkg_install ripgrep rg
         _pkg_install openssh ssh
+        _pkg_install which
         _pkg_install build-essential gcc
         if [ -d ~/storage/shared ]; then
             pass "storage access granted"
