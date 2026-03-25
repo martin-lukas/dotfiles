@@ -25,7 +25,9 @@ if ssh-add -l 2>/dev/null | grep -q "$KEY_FP"; then
     pass "SSH key in agent"
 else
     doing "Adding SSH key to agent"
-    if ssh-add ~/.ssh/github 2>/dev/null; then
+    SSH_ADD_FLAGS=""
+    [[ "$CONTEXT" == "macos" ]] && SSH_ADD_FLAGS="--apple-use-keychain"
+    if ssh-add $SSH_ADD_FLAGS ~/.ssh/github 2>/dev/null; then
         pass "SSH key added to agent"
     else
         fail "SSH key found but could not add to agent"

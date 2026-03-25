@@ -54,5 +54,20 @@ if grep -qi microsoft /proc/version 2>/dev/null; then
     alias cdd='cd /mnt/c/Users/mail/Desktop'
 fi
 
+# --- SSH agent ---
+_SSH_ENV="$HOME/.ssh/agent-env"
+_start_ssh_agent() {
+    ssh-agent > "$_SSH_ENV"
+    chmod 600 "$_SSH_ENV"
+    . "$_SSH_ENV" > /dev/null
+}
+if [ -f "$_SSH_ENV" ]; then
+    . "$_SSH_ENV" > /dev/null
+    ssh-add -l &>/dev/null || _start_ssh_agent
+else
+    _start_ssh_agent
+fi
+unset _SSH_ENV
+
 # --- Machine-specific overrides (not tracked in git) ---
 [ -f ~/.bashrc.local ] && . ~/.bashrc.local
