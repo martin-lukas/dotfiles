@@ -28,6 +28,12 @@ else
 fi
 export CONTEXT
 
+# --- Guard: NixOS manages packages via configuration.nix ---
+if [[ "$CONTEXT" == "nixos" ]]; then
+    echo "NixOS detected — bootstrap is not supported. Manage packages via configuration.nix."
+    exit 1
+fi
+
 # --- Run modules ---
 . "$DOTFILES/scripts/packages.sh"
 [[ "$CONTEXT" == "macos" ]] && . "$DOTFILES/scripts/macos.sh"

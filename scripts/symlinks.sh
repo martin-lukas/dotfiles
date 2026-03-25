@@ -32,7 +32,7 @@ fi
 
 # Context-specific
 case "$CONTEXT" in
-    wsl|linux|termux)
+    wsl|linux|nixos|termux)
         _symlink "$DOTFILES/common/.bashrc" ~/.bashrc ".bashrc"
         if [[ "$CONTEXT" == "termux" ]]; then
             mkdir -p ~/.termux

@@ -30,6 +30,8 @@ elif grep -qi microsoft /proc/version 2>/dev/null; then
     CONTEXT="wsl"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     CONTEXT="macos"
+elif grep -qi nixos /etc/os-release 2>/dev/null; then
+    CONTEXT="nixos"
 else
     CONTEXT="linux"
 fi

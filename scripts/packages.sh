@@ -126,7 +126,4 @@ case "$CONTEXT" in
             fi
         fi
         ;;
-    nixos)
-        fail "NixOS detected — manage packages via configuration.nix or nix-env, not this script"
-        ;;
 esac
