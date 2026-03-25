@@ -6,4 +6,4 @@ export PATH="$PATH:$HOME/.bin"
 export PATH="$HOME/.local/bin:$PATH"
 
 # Machine-specific overrides (not tracked in git)
-[ -f ~/.zprofile.local ] && source ~/.zprofile.local
+if [ -f ~/.zprofile.local ]; then source ~/.zprofile.local; fi

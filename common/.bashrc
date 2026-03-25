@@ -10,7 +10,7 @@ HISTFILESIZE=1000000
 HISTTIMEFORMAT="%F %T "             # timestamp every entry: 2026-03-25 21:05:33
 shopt -s histappend                 # append to history file instead of overwriting
 # Flush each command to history immediately so it's available in other sessions
-PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }history -a"
+PROMPT_COMMAND='__exit_code=$?; history -a'
 
 # --- Terminal ---
 shopt -s checkwinsize               # recheck terminal size after each command, keeps LINES/COLUMNS accurate
@@ -40,16 +40,25 @@ if ! declare -f __git_ps1 > /dev/null; then
     }
 fi
 
+# Prompt symbol: green ❯ on success, red ❯ on failure
+__prompt_symbol() {
+    if [ "${__exit_code:-0}" -eq 0 ]; then
+        printf '\[\033[01;32m\]❯\[\033[00m\]'
+    else
+        printf '\[\033[01;31m\]❯\[\033[00m\]'
+    fi
+}
+
 # tput setaf 1: test whether the terminal supports ANSI colors (exit 0 if yes)
 if tput setaf 1 &>/dev/null; then
     if [ -n "${TERMUX_VERSION:-}" ]; then
         # Termux: replace unreadable Android user/hostname with 'termux'
-        PS1='\[\033[01;32m\]termux\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[01;33m\]$(__git_ps1 " (%s)")\[\033[00m\]\$ '
+        PS1='\[\033[01;32m\]termux\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[01;33m\]$(__git_ps1 " (%s)")\[\033[00m\]\n$(__prompt_symbol) '
     else
-        PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[01;33m\]$(__git_ps1 " (%s)")\[\033[00m\]\$ '
+        PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[01;33m\]$(__git_ps1 " (%s)")\[\033[00m\]\n$(__prompt_symbol) '
     fi
 else
-    PS1='\u@\h:\w$(__git_ps1 " (%s)")\$ '
+    PS1='\u@\h:\w$(__git_ps1 " (%s)")\n❯ '
 fi
 
 # --- Colors ---
@@ -106,4 +115,4 @@ fi
 unset _SSH_ENV
 
 # --- Machine-specific overrides (not tracked in git) ---
-[ -f ~/.bashrc.local ] && . ~/.bashrc.local
+if [ -f ~/.bashrc.local ]; then . ~/.bashrc.local; fi

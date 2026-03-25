@@ -11,4 +11,4 @@ alias mv='mv -i'
 alias rm='rm -i'
 
 # Machine-specific aliases (not tracked in git)
-[ -f ~/.bash_aliases.local ] && . ~/.bash_aliases.local
+if [ -f ~/.bash_aliases.local ]; then . ~/.bash_aliases.local; fi
