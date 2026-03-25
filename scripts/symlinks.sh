@@ -6,6 +6,7 @@ _symlink() {
     if [ -e "$dst" ] && [ ! -L "$dst" ]; then
         fail "$label — real file exists at $dst, remove it to allow symlinking"
     else
+        doing "Symlinking $label"
         ln -sf "$src" "$dst"
         pass "$label"
     fi
@@ -27,6 +28,7 @@ case "$CONTEXT" in
         if [[ "$CONTEXT" == "termux" ]]; then
             mkdir -p ~/.termux
             _symlink "$DOTFILES/termux/termux.properties" ~/.termux/termux.properties "termux.properties"
+            doing "Reloading termux settings"
             termux-reload-settings && pass "termux settings reloaded" || fail "termux-reload-settings failed"
         fi
         ;;

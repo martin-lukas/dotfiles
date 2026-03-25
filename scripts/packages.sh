@@ -9,10 +9,13 @@ _apt_install() {
     local pkg="$1" cmd="${2:-$1}"
     if _installed "$cmd"; then
         pass "$cmd (already installed)"
-    elif sudo apt-get install -y "$pkg" &>/dev/null; then
-        pass "$cmd"
     else
-        fail "$cmd — apt install failed"
+        doing "Installing $pkg"
+        if sudo apt-get install -y "$pkg" &>/dev/null; then
+            pass "$cmd"
+        else
+            fail "$cmd — apt install failed"
+        fi
     fi
 }
 
@@ -20,10 +23,13 @@ _brew_install() {
     local pkg="$1" cmd="${2:-$1}"
     if _installed "$cmd"; then
         pass "$cmd (already installed)"
-    elif brew install "$pkg" &>/dev/null; then
-        pass "$cmd"
     else
-        fail "$cmd — brew install failed"
+        doing "Installing $pkg"
+        if brew install "$pkg" &>/dev/null; then
+            pass "$cmd"
+        else
+            fail "$cmd — brew install failed"
+        fi
     fi
 }
 
@@ -31,16 +37,20 @@ _brew_cask_install() {
     local pkg="$1"
     if brew list --cask "$pkg" &>/dev/null; then
         pass "$pkg (already installed)"
-    elif brew install --cask "$pkg" &>/dev/null; then
-        pass "$pkg"
     else
-        fail "$pkg — brew cask install failed"
+        doing "Installing $pkg (cask)"
+        if brew install --cask "$pkg" &>/dev/null; then
+            pass "$pkg"
+        else
+            fail "$pkg — brew cask install failed"
+        fi
     fi
 }
 
 case "$CONTEXT" in
     termux)
         # pkg is Termux's package manager — no sudo needed
+        doing "Updating and installing packages (termux)"
         pkg update -y &>/dev/null
         pkg upgrade -y &>/dev/null
         pkg install -y vim fzf tree ripgrep openssh build-essential &>/dev/null
@@ -52,6 +62,7 @@ case "$CONTEXT" in
         fi
         ;;
     wsl|linux)
+        doing "Updating apt package lists"
         sudo apt-get update -qq
         _apt_install vim
         _apt_install fzf
@@ -61,7 +72,7 @@ case "$CONTEXT" in
         ;;
     macos)
         if ! _installed brew; then
-            echo "    Installing Homebrew..."
+            doing "Installing Homebrew"
             # HOMEBREW_NO_INTERACTIVE skips prompts; installer may attempt to modify
             # ~/.zprofile but will skip if the eval line already exists (it does in ours)
             NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" 2>/dev/null
@@ -85,7 +96,7 @@ case "$CONTEXT" in
         if xcode-select -p &>/dev/null; then
             pass "Xcode CLI tools (already installed)"
         else
-            echo "    Installing Xcode CLI tools (follow the prompt)..."
+            doing "Installing Xcode CLI tools (follow the prompt)"
             if xcode-select --install 2>/dev/null; then
                 pass "Xcode CLI tools"
             else

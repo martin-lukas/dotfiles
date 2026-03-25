@@ -6,11 +6,13 @@ if [ ! -f ~/.ssh/github ]; then
     return
 fi
 
+doing "Setting GitHub SSH key permissions"
 chmod 600 ~/.ssh/github
 pass "GitHub SSH key found"
 
 # Start agent if not already running in this session
 if [ -z "${SSH_AUTH_SOCK:-}" ]; then
+    doing "Starting SSH agent"
     eval "$(ssh-agent -s)" > /dev/null
 fi
 
@@ -19,6 +21,7 @@ KEY_FP="$(ssh-keygen -lf ~/.ssh/github 2>/dev/null | awk '{print $2}')"
 if ssh-add -l 2>/dev/null | grep -q "$KEY_FP"; then
     pass "SSH key in agent"
 else
+    doing "Adding SSH key to agent"
     if ssh-add ~/.ssh/github 2>/dev/null; then
         pass "SSH key added to agent"
     else
@@ -28,6 +31,7 @@ else
 fi
 
 # Test GitHub connectivity
+doing "Testing GitHub SSH connectivity"
 AUTH_RESULT="$(ssh -T git@github.com -o StrictHostKeyChecking=accept-new 2>&1 || true)"
 if echo "$AUTH_RESULT" | grep -q "successfully authenticated"; then
     pass "GitHub SSH auth verified"
