@@ -38,8 +38,20 @@ case "$CONTEXT" in
         ;;
     macos)
         if ! _installed brew; then
-            fail "Homebrew not found — install from https://brew.sh first"
-            return
+            echo "    Installing Homebrew..."
+            # HOMEBREW_NO_INTERACTIVE skips prompts; installer may attempt to modify
+            # ~/.zprofile but will skip if the eval line already exists (it does in ours)
+            NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" 2>/dev/null
+            # Safety check: ensure installer didn't append anything to our dotfiles zprofile
+            if grep -q "Added by Homebrew" "$DOTFILES/macos/.zprofile" 2>/dev/null; then
+                sed -i '' '/Added by Homebrew/,/brew shellenv/d' "$DOTFILES/macos/.zprofile"
+                fail "Homebrew installer modified macos/.zprofile — cleaned up, please review"
+            else
+                pass "Homebrew installed"
+            fi
+            eval "$(/opt/homebrew/bin/brew shellenv)"
+        else
+            pass "Homebrew (already installed)"
         fi
         _brew_install vim
         _brew_install fzf
