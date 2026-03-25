@@ -27,6 +27,7 @@ export CONTEXT
 
 # --- Run modules ---
 . "$DOTFILES/scripts/packages.sh"
+[[ "$CONTEXT" == "macos" ]] && . "$DOTFILES/scripts/macos.sh"
 
 # --- Summary ---
 echo ""
