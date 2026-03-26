@@ -63,8 +63,7 @@ echo "========================================"
 echo ""
 if [[ "$CONTEXT" == "macos" ]]; then
     echo "To apply shell changes:"
-    echo "source ~/.zprofile"
-    echo "source ~/.zshrc"
+    echo "source ~/.zprofile && source ~/.zshrc"
 else
     echo "To apply shell changes:"
     echo "source ~/.bashrc"
