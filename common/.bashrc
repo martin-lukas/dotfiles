@@ -75,6 +75,10 @@ alias ip='ip --color=auto'
 export PATH="$HOME/.local/bin:$PATH"
 export EDITOR=$(command -v vim || command -v vi)
 
+# --- systemd pager ---
+# Remove 'S' (chop long lines) from less flags so journalctl/systemctl output wraps
+export SYSTEMD_LESS=FRXMK
+
 # --- Bash completion ---
 # Enable tab-completion for commands, flags, and arguments
 if ! shopt -oq posix; then
