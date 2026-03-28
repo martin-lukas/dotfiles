@@ -1,3 +1,6 @@
+# Colorized commands
+alias diff='diff --color=auto'
+
 # Navigation
 alias ll='ls -alhF'
 alias la='ls -A'
