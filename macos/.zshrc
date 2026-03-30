@@ -1,3 +1,8 @@
+# Disable terminal flow control (Ctrl-S/Ctrl-Q) and suspend signals (Ctrl-Z/Ctrl-Y)
+stty -ixon                       # disable Ctrl-S (pause) and Ctrl-Q (resume)
+stty susp undef                  # disable Ctrl-Z (suspend)
+stty dsusp undef                 # disable Ctrl-Y (delayed suspend)
+
 # History — extended with timestamps
 HISTSIZE=1000000
 SAVEHIST=$HISTSIZE
