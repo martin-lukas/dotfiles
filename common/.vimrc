@@ -16,6 +16,9 @@ set clipboard=unnamed     " use system clipboard for yank/paste by default
 
 highlight LineNr ctermfg=gray guifg=gray
 
+" Disable recording (prevents accidental Ctrl-Q-like behavior)
+nnoremap q <nop>
+
 " When reopening a file, jump to the last position the cursor was at
 autocmd BufReadPost *
   \ if line("'\"") > 0 && line("'\"") <= line("$") |
