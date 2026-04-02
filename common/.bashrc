@@ -78,6 +78,7 @@ alias ip='ip --color=auto'
 # --- PATH & editor ---
 export PATH="$HOME/.local/bin:$PATH"
 export EDITOR=$(command -v vim || command -v vi)
+export ENABLE_CLAUDEAI_MCP_SERVERS=false
 
 # --- systemd pager ---
 # Remove 'S' (chop long lines) from less flags so journalctl/systemctl output wraps

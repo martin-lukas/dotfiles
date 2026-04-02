@@ -5,5 +5,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="$PATH:$HOME/.bin"
 export PATH="$HOME/.local/bin:$PATH"
 
+export ENABLE_CLAUDEAI_MCP_SERVERS=false
+
 # Machine-specific overrides (not tracked in git)
 if [ -f ~/.zprofile.local ]; then source ~/.zprofile.local; fi
