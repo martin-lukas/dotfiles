@@ -18,7 +18,6 @@ shopt -s checkwinsize               # recheck terminal size after each command, 
 # Disable terminal flow control (Ctrl-S/Ctrl-Q) and suspend signals (Ctrl-Z/Ctrl-Y)
 stty -ixon                          # disable Ctrl-S (pause) and Ctrl-Q (resume)
 stty susp undef                     # disable Ctrl-Z (suspend)
-stty dsusp undef                    # disable Ctrl-Y (delayed suspend)
 
 # --- Color prompt ---
 # Try to source git-prompt.sh, which provides __git_ps1 for branch display in prompt.
