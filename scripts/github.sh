@@ -1,4 +1,4 @@
-# GitHub SSH setup: key permissions, agent, connectivity check.
+# GitHub SSH setup: key permissions and connectivity check.
 # Sourced by install.sh — inherits DOTFILES, CONTEXT, pass/skip/fail.
 
 if [ ! -f ~/.ssh/github ]; then
@@ -12,28 +12,6 @@ if [ "$CURRENT_PERMS" != "600" ]; then
     chmod 600 ~/.ssh/github
 fi
 pass "GitHub SSH key found"
-
-# Start agent if not already running in this session
-if [ -z "${SSH_AUTH_SOCK:-}" ]; then
-    doing "Starting SSH agent"
-    eval "$(ssh-agent -s)" > /dev/null
-fi
-
-# Add key if not already loaded
-KEY_FP="$(ssh-keygen -lf ~/.ssh/github 2>/dev/null | awk '{print $2}')"
-if ssh-add -l 2>/dev/null | grep -q "$KEY_FP"; then
-    pass "SSH key in agent"
-else
-    doing "Adding SSH key to agent"
-    SSH_ADD_FLAGS=""
-    [[ "$CONTEXT" == "macos" ]] && SSH_ADD_FLAGS="--apple-use-keychain"
-    if ssh-add $SSH_ADD_FLAGS ~/.ssh/github 2>/dev/null; then
-        pass "SSH key added to agent"
-    else
-        fail "SSH key found but could not add to agent"
-        return
-    fi
-fi
 
 # Test GitHub connectivity
 doing "Testing GitHub SSH connectivity"

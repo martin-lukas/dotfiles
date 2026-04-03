@@ -104,25 +104,6 @@ if grep -qi microsoft /proc/version 2>/dev/null; then
     alias cdd='cd /mnt/c/Users/mail/Desktop'
 fi
 
-# --- SSH agent ---
-# Start a persistent SSH agent if one isn't already running, and reuse it
-# across sessions via a saved env file. Without this, the agent would need
-# to be started manually each time (especially on Termux).
-_SSH_ENV="$HOME/.ssh/agent-env"
-_start_ssh_agent() {
-    ssh-agent > "$_SSH_ENV"
-    chmod 600 "$_SSH_ENV"
-    . "$_SSH_ENV" > /dev/null
-}
-if [ -f "$_SSH_ENV" ]; then
-    . "$_SSH_ENV" > /dev/null
-    # ssh-add -l exit code 2 means agent is unreachable — restart it
-    ssh-add -l &>/dev/null || _start_ssh_agent
-else
-    _start_ssh_agent
-fi
-unset _SSH_ENV
-
 # --- fzf (Ctrl+R history search, Ctrl+T file search, Alt+C cd) ---
 if command -v fzf &>/dev/null; then
     eval "$(fzf --bash)"
