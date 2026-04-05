@@ -4,7 +4,7 @@
 case $- in *i*) ;; *) return;; esac
 
 # --- History ---
-HISTCONTROL=ignoreboth              # ignore duplicates + lines starting with space
+HISTCONTROL=ignoredups              # ignore duplicate commands
 HISTSIZE=1000000
 HISTFILESIZE=1000000
 HISTTIMEFORMAT="%F %T "             # timestamp every entry: 2026-03-25 21:05:33
