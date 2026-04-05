@@ -11,6 +11,7 @@ HISTTIMEFORMAT="%F %T "             # timestamp every entry: 2026-03-25 21:05:33
 shopt -s histappend                 # append to history file instead of overwriting
 # Flush each command to history immediately so it's available in other sessions
 PROMPT_COMMAND='__exit_code=$?; history -a; history -n'
+bind 'set enable-bracketed-paste off'  # bracketed paste silently drops pasted commands from history
 
 # --- Terminal ---
 shopt -s checkwinsize               # recheck terminal size after each command, keeps LINES/COLUMNS accurate
