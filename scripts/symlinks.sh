@@ -30,6 +30,10 @@ else
     pass "~/.ssh/config (skipped)"
 fi
 
+# Scripts
+mkdir -p ~/.local/bin
+_symlink "$DOTFILES/bin/hs" ~/.local/bin/hs "~/.local/bin/hs"
+
 # Context-specific
 case "$CONTEXT" in
     wsl|linux|nixos|termux)

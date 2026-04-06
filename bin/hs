@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Connect to homeserver via local network or Tailscale fallback
+
+HOMESERVER_LAN_IP="192.168.1.10"
+SSH_LAN="homeserver"
+SSH_TS="ts-homeserver"
+
+_ts_ip() {
+  [ -n "${TERMUX_VERSION:-}" ] && return
+  tailscale status --json | jq -r '.Peer[] | select(.HostName=="homeserver") | .TailscaleIPs[0]' 2>/dev/null
+}
+
+if timeout 1 bash -c "exec 3<>/dev/tcp/${HOMESERVER_LAN_IP}/22" 2>/dev/null; then
+  echo "Connecting over LAN to ${HOMESERVER_LAN_IP}..."
+  exec ssh "$SSH_LAN"
+else
+  ts_ip=$(_ts_ip)
+  echo "Connecting over Tailscale${ts_ip:+ to ${ts_ip}}..."
+  exec ssh "$SSH_TS"
+fi
