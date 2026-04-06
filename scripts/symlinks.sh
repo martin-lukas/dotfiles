@@ -31,8 +31,10 @@ else
 fi
 
 # Scripts
-mkdir -p ~/.local/bin
-_symlink "$DOTFILES/bin/hs" ~/.local/bin/hs "~/.local/bin/hs"
+if ! is_homeserver; then
+    mkdir -p ~/.local/bin
+    _symlink "$DOTFILES/bin/hs" ~/.local/bin/hs "~/.local/bin/hs"
+fi
 
 # Context-specific
 case "$CONTEXT" in

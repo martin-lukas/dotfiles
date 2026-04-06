@@ -21,7 +21,9 @@ pass()  { OK+=("  [✓] $1"); }
 fail()  { FAIL+=("  [!] $1"); }
 doing() { echo "  $1..."; }
 
-export -f pass fail doing
+is_homeserver() { [[ "$(hostname)" == "homeserver" ]]; }
+
+export -f pass fail doing is_homeserver
 
 # --- Context detection ---
 if [ -n "${TERMUX_VERSION:-}" ]; then
@@ -61,10 +63,6 @@ else
 fi
 echo "========================================"
 echo ""
-if [[ "$CONTEXT" == "macos" ]]; then
-    echo "To apply shell changes:"
-    echo "source ~/.zprofile && source ~/.zshrc"
-else
-    echo "To apply shell changes:"
-    echo "source ~/.bashrc"
-fi
+rc=$([[ "$CONTEXT" == "macos" ]] && echo '~/.zprofile' || echo '~/.bashrc')
+echo "To apply shell changes:"
+echo "source $rc"
