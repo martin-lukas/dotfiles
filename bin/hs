@@ -10,7 +10,7 @@ _ts_ip() {
   tailscale status --json | jq -r '.Peer[] | select(.HostName=="homeserver") | .TailscaleIPs[0]' 2>/dev/null
 }
 
-if timeout 1 bash -c "exec 3<>/dev/tcp/${HOMESERVER_LAN_IP}/22" 2>/dev/null; then
+if nc -z -w 1 "${HOMESERVER_LAN_IP}" 22 2>/dev/null; then
   echo "Connecting over LAN to ${HOMESERVER_LAN_IP}..."
   exec ssh "$SSH_LAN"
 else

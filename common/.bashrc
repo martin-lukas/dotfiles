@@ -14,6 +14,8 @@ PROMPT_COMMAND='__exit_code=$?; history -a; history -n'
 
 # --- Terminal ---
 shopt -s checkwinsize               # recheck terminal size after each command, keeps LINES/COLUMNS accurate
+export TERM=xterm-256color          # 256-color terminal type
+export COLORTERM=256color           # extra hint for apps that check COLORTERM (e.g. Claude Code)
 
 # Disable terminal flow control (Ctrl-S/Ctrl-Q) and suspend signals (Ctrl-Z/Ctrl-Y)
 stty -ixon                          # disable Ctrl-S (pause) and Ctrl-Q (resume)

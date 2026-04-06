@@ -15,6 +15,8 @@ export PROMPT_EOL_MARK=''        # suppress the % marker shown on lines without 
 
 # Colors
 export CLICOLOR=1
+export TERM=xterm-256color          # 256-color terminal type
+export COLORTERM=256color           # extra hint for apps that check COLORTERM (e.g. Claude Code)
 
 # Prompt with git branch
 # vcs_info is zsh's built-in VCS integration — populates vcs_info_msg_0_ before each prompt
