@@ -19,22 +19,24 @@
     rebase = true           # rebase instead of merge on pull, keeps history linear
 
 [alias]
-    st  = status
-    ss  = st -sb                        # short status with branch info
-    lg  = log --oneline --graph --decorate --all  # visual branch graph
-    d   = diff --unified=10 HEAD        # diff against last commit, more context lines
-    a   = add -A
-    c   = commit
-    ac  = !git a && git c               # stage all and commit in one step
-    undo = reset --soft HEAD~1          # undo last commit, keep changes staged
-    wipe = reset --hard HEAD            # discard all local changes
-    ri  = rebase -i
-    rc  = rebase --continue
-    pu  = push -u origin                # push and set upstream
-    p   = push origin
-    pf  = p --force-with-lease          # safer force push — fails if remote has new commits
-    f   = fetch
-    pl  = pull --rebase
+    st    = status
+    ss    = st -sb
+    lg    = log --oneline --graph --decorate --all
+    d     = diff --unified=10 HEAD
+    a     = add -A
+    c     = commit
+    amend = commit --amend --no-edit
+    ac    = !git a && git c
+    aa    = !git a && git amend
+    undo  = reset --soft HEAD~1
+    wipe  = reset --hard HEAD
+    ri    = rebase -i
+    rc    = rebase --continue
+    pu    = push -u origin
+    p     = push origin
+    pf    = p --force-with-lease
+    f     = fetch
+    pl    = pull --rebase
 
 [include]
     path = ~/.gitconfig.local
